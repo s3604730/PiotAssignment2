@@ -1,5 +1,8 @@
 from classList.Database import Database
 from classList.User import User
+import hashlib
+import getpass
+import re
 
 
 class Menu():
@@ -33,33 +36,49 @@ class Menu():
         firstName = ""
         while(firstName == ""):
             firstName = input("Enter first name: ")
+            if not firstName.isalpha():
+                firstName = ""
+                print("Input is invalid!")
+                continue
 
         lastName = ""
         while(lastName == ""):
             lastName = input("Enter last name: ")
+            if not lastName.isalpha():
+                lastName = ""
+                print("Input is invalid!")
+                continue
 
         # will validate email later
         email = ""
         while(email == ""):
             email = input("Enter email: ")
+            if not re.fullmatch(r"[^@]+@[^@]+\.[^@]+", email):
+                email = ""
+                print("Email is not valid")
+                continue
 
         # will validate password later
+        hashedPassword = ""
+
         password = ""
         while(password == ""):
-            password = input("Enter password: ")
+            password = getpass.getpass("Enter password: ")
 
         password2 = ""
         while(password2 == ""):
-            password2 = input("Confirm password: ")
+            password2 = getpass.getpass("Confirm password: ")
             if(password2 != password):
                 password2 = ""
                 print("Passwords do not match")
                 continue
+            else:
+                hashedPassword = hashlib.sha256(password.encode()).hexdigest()
 
         # may use try-catch later
-        user = User(username, password, firstName, lastName, email)
+        user = User(username, hashedPassword, firstName, lastName, email)
         db.insertUser(user)
-        return user
+        print(username + " has been registered!")
 
     def loginUser(self):
         username = ""
@@ -68,11 +87,13 @@ class Menu():
 
         password = ""
         while(password == ""):
-            password = input("Enter password: ")
+            password = getpass.getpass("Enter password: ")
 
         db = Database()
 
-        user = db.findUserByUsernameAndPassword(username, password)
+        hashedPassword = hashlib.sha256(password.encode()).hexdigest()
+
+        user = db.findUserByUsernameAndPassword(username, hashedPassword)
         if(user == None):
             print("Wrong login credentials")
             Menu()
