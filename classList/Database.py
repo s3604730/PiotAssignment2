@@ -7,8 +7,8 @@ from classList.User import User
 class Database():
     # mysql config of Pi
     host = "localhost"
-    user = "root"
-    password = ""
+    user = "pi1"
+    password = "abc123"
     database = "iot2"
 
     def __init__(self):
