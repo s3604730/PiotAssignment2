@@ -54,6 +54,8 @@ class MasterPiSocket(AbstractSocket):
             print("Disconnecting from client.")
         print("Closing listening socket.")
     print("Done.")
+    return userName 
+
     #Master pi sends a logout message to the reception pi
     def sendMessageLogoutSocket(self, userName):
         HOST = "10.132.132.187"  # The server's hostname or IP address.

@@ -43,6 +43,7 @@ class ReceptionPiSocket(AbstractSocket):
             print("{}", data.decode())
 
         print("Done.")
+        return True
 
     # abstract method, skip because reception pi doesn't do this
     def receiveMessageLoginSocket(self, userName):
