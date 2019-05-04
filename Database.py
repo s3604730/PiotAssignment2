@@ -23,7 +23,7 @@ class Database:
     def __exit__(self, type, value, traceback):
         self.close()
 
-    def createLmsUserTable(self):
+    def createTables(self):
         with self.connection.cursor() as cursor:
             cursor.execute("""
                 create table if not exists LmsUser (
