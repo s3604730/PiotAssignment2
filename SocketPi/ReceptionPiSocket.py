@@ -6,39 +6,47 @@
 import socket
 from AbstractSocket import AbstractSocket
 
+# class for reception pi based on abstract
+
 
 class ReceptionPiSocket(AbstractSocket):
     def __init__(self):
         pass
+    # send message from reception pi to master pi
 
     def sendMessageLoginSocket(self, userName):
         HOST = "10.132.132.187"  # The server's hostname or IP address.
         PORT = 65000         # The port used by the server. s
         ADDRESS = (HOST, PORT)
 
-        #sending message
+        # sending message
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             print("Connecting to {}...".format(ADDRESS))
+            # connect to the address
             s.connect(ADDRESS)
             print("Connected.")
             # send username
             #userName = "yeet"
+            # send the username encoded
             s.sendall(userName.encode())
+            # receive incoming input from the server
             data = s.recv(4096)
+            # print the decoded message
             print("{}", data.decode())
 
             print("Disconnecting from server.")
-            
 
-            
         print("Done.")
 
+    # abstract method, skip because reception pi doesn't do this
     def receiveMessageLoginSocket(self, userName):
         pass
+    # abstract method, skip because reception pi doesn't do this
 
     def sendMessageLogoutSocket(self, userName):
         pass
 
+    # reception pi receives the logout message and the username
     def receiveMessageLogoutSocket(self, userName):
         # Empty string means to listen on all IP's on the machine, also works with IPv6.
         HOST = ""
@@ -50,23 +58,27 @@ class ReceptionPiSocket(AbstractSocket):
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             s.bind(ADDRESS)
             s.listen()
+            # waiting to receive a message from any address at port 65000
 
             print("Listening on {}...".format(ADDRESS))
             conn, addr = s.accept()
             with conn:
+                # when a connection has been connected to
                 print("Connected to {}".format(addr))
                 data = conn.recv(4096)
-                #get username variable
+                # get username variable
                 userName = data.decode()
                 print(userName)
 
                 while True:
+                    # receive the message sent
                     data = conn.recv(4096)
                     if(not data):
                         break
-
+                    # print decoded message
                     print("Received {} bytes of data decoded to: '{}'".format(
                         len(data), data.decode()))
+                    # send back a message to indicate that the logout message has been received
                     print("Sending data back.")
                     conn.sendall(data)
 
