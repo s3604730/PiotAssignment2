@@ -21,10 +21,13 @@ class ReceptionPiSocket(AbstractSocket):
             print("Connecting to {}...".format(ADDRESS))
             s.connect(ADDRESS)
             print("Connected.")
-            #send username 
+            # send username
+            #userName = "yeet"
             s.sendall(userName.encode())
             data = s.recv(4096)
             print("{}", data.decode())
+
+            print("Disconnecting from server.")
             
 
             

@@ -30,17 +30,17 @@ class MasterPiSocket(AbstractSocket):
             with conn:
                 while True:
                     print("Connected to {}".format(addr))
-                    #receive userName
+                    # receive userName
                     data = conn.recv(4096)
-                    #set userName
+                    # set userName
                     userName = data.decode()
                     print(userName)
-                    #send success message back
+                    # send success message back
                     successMessage = "Successfully logged into MASTER PI"
                     conn.sendall(successMessage.encode())
-                    
                     break
 
+''
                 print("Disconnecting from client.")
             print("Closing listening socket.")
         print("Done.")
