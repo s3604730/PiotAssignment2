@@ -30,16 +30,25 @@ class MasterPiSocket(AbstractSocket):
             #when a connection has been established
             with conn:
                 while True:
-                    print("Connected to {}".format(addr))
-                    # receive userName
-                    data = conn.recv(4096)
-                    # set userName
-                    userName = data.decode()
-                    print(userName)
-                    # send success message back
-                    successMessage = "Successfully logged into MASTER PI"
-                    conn.sendall(successMessage.encode())
-                    break
+            print("Connected to {}".format(addr))
+            #Receive message that login is sucessful
+            data = conn.recv(4096)
+            coolMessage = data.decode()
+            print(coolMessage)
+            # send success message back requesting for username
+            userNameRequestMessage = "Give Username"
+            conn.sendall(userNameRequestMessage.encode())
+
+            # receive userName
+            data = conn.recv(4096)
+            # set userName
+            userName = data.decode()
+            print(userName)
+
+            # send success message back saying login was successful
+            successMessage = "Successfully logged into MASTER PI"
+            conn.sendall(successMessage.encode())
+            break
 
 
 ''

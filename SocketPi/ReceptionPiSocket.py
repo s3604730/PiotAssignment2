@@ -22,19 +22,25 @@ class ReceptionPiSocket(AbstractSocket):
         # sending message
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             print("Connecting to {}...".format(ADDRESS))
-            # connect to the address
             s.connect(ADDRESS)
             print("Connected.")
-            # send username
-            #userName = "yeet"
-            # send the username encoded
-            s.sendall(userName.encode())
-            # receive incoming input from the server
-            data = s.recv(4096)
-            # print the decoded message
-            print("{}", data.decode())
 
-            print("Disconnecting from server.")
+
+            # Send a message for login successful
+            yeet = "Login Successful!"
+            s.sendall(yeet.encode())
+
+            # Receive a message requesting for Username
+            data = s.recv(4096)
+            print(data.decode())
+
+            # send the username
+            s.sendall(userName.encode())
+
+            # receive success message
+            data = s.recv(4096)
+
+            print("{}", data.decode())
 
         print("Done.")
 
