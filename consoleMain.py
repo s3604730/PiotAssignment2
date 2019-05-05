@@ -1,16 +1,16 @@
-import book
+import book, 
 
 
 #stays idle if no message is sent from Reception Pi
 class consoleMP:
     def __init__(self):
-        initilaise()
+        self.initilaise()
 
 
     def initialise(self):
         print("1: Search a book")
         print("2: Borrow a book")
-        print("3: return a book")
+        print("3: Return a book")
         print("4: Logout")
 
         choice = input("Enter your choice")
@@ -28,11 +28,7 @@ class consoleMP:
 
     #searches for a book and returns its the top 5 results with id, book and author
     def searchBook(self, bookName):
-        db = Database()
-        stm = ("SELECT * FROM users WHERE username = %s")
-        for rows in Title:
-            if bookName != None and bookName == Title:
-                print()        
+        getBook()      
 
 
 
