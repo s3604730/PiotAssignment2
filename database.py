@@ -83,7 +83,9 @@ class Database:
 #searches for book with title and returns top 5 results
     def findBook(self, bookName):
         with self.connection.cursor() as cursor:
-            cursor.execute("SELECT * FROM Book WHERE Title = %s LIMIT 5",(bookName))      
+            print("\nSearch Results:\n")
+            for row in cursor.execute() ("SELECT * FROM Book WHERE Title = %s LIMIT 5",(bookName)):
+                print(row)    
     
 # insert borrowed book
     def insertBorrowedBook(self, lmsuserID, bookID, status, borrowedDate, returnedDate):

@@ -18,7 +18,9 @@ class consoleMP:
         if choice == "1":
             self.searchBook()
         elif choice == "2":
-            self.borrowBook()
+            print("Input Book Title")
+            bookTitle = input(bookName)
+            self.findBook(input(bookTitle))
         elif choice == "3":
             self.returnBook()
         elif choice == "4":
@@ -28,7 +30,8 @@ class consoleMP:
 
     #searches for a book and returns its the top 5 results with id, book and author
     def searchBook(self, bookName):
-        getBook()      
+
+              
 
 
 
