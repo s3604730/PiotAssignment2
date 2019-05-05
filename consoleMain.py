@@ -1,9 +1,10 @@
-import book, 
-
+from Database import Database
 
 #stays idle if no message is sent from Reception Pi
 class consoleMP:
     def __init__(self):
+        with Database() as db:
+            db.createTables()
         self.initilaise()
 
 
@@ -14,29 +15,31 @@ class consoleMP:
         print("4: Logout")
 
         choice = input("Enter your choice")
-
+        print()
         if choice == "1":
-            self.searchBook()
+            bookTitle = input("Input Book TItle")
+            self.searchBook(bookTitle)
         elif choice == "2":
-            print("Input Book Title")
-            bookTitle = input(bookName)
-            self.findBook(input(bookTitle))
+            self.borrowBook()
         elif choice == "3":
             self.returnBook()
         elif choice == "4":
             self.logout()
+        else:
+            print("Invalid Input!")
 
-
-
-    #searches for a book and returns its the top 5 results with id, book and author
-    def searchBook(self, bookName):
-
-              
+    def searchBook(self, bookTitle):
+        print("Search Results:")
+        print("{:<15} {}".format("Book ID", "Title","Author", "Publish Date"))
+        with Database() as db:
+            for books in db.getBook():
+                print("{:<15} {}".format(books[0], books[1]))
 
 
 
     #takes the id of a book and returns a borrowing id if it's available
-    def borrowBook()
+    def borrowBook(self):
+
 
     #takes a borrowing id and returns the book
     def returnBook()

@@ -1,11 +1,11 @@
 
 
 class book:
-    def __init__(self,bookName,bookID,authorName,ISBN):
-        self.bookName = bookName
-        self.bookID = bookID
-        self.authorName = authorName
-        self.ISBN = ISBN
+    def __init__(self,__bookName,__bookID,__authorName,__ISBN):
+        self.__bookName = __bookName
+        self.__bookID = __bookID
+        self.__authorName = __authorName
+        self.__ISBN = __ISBN
 
     def getBookName(self):
         return self.bookName
