@@ -84,6 +84,17 @@ class Database:
             cursor.execute(
                 "select BookID, Title, Author, PublishedDate from Book")
 
+    def searchBook(self, bookDetail):
+        with self.connection.cursor() as cursor:
+            sql_select = """"select * from Book where BookID = %s"""
+            cursor.execute(sql_select,(bookDetail,))
+            for row in getBook():
+                print("Book ID: ", row[0],)
+                print("Title: ",row[1],)
+                print("Author: ",row[2],)
+                print("Published Date: ",row[4])
+
+
 # insert borrowed book
     def insertBorrowedBook(self, lmsuserID, bookID, status, borrowedDate, returnedDate):
         with self.connection.cursor() as cursor:

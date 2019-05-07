@@ -1,4 +1,5 @@
 from Database import Database
+from calendar_api.calendar_api import google_calendar_api
 
 #stays idle if no message is sent from Reception Pi
 class consoleMP:
@@ -6,7 +7,7 @@ class consoleMP:
         with Database() as db:
             db.createTables()
         self.initilaise()
-
+        m=google_calendar_api()
 
     def initialise(self):
         print("1: Search a book")
@@ -28,29 +29,43 @@ class consoleMP:
         else:
             print("Invalid Input!")
 
-    def searchBook(self, bookDetail):
-        print("---Search Results:----")
-        print("{:<15} {}".format("Book ID", "Title","Author", "Publish Date"))
-        with Database() as db:
-            for books in db.getBook():
-                print("{:<15} {}".format(books[0], books[1]))
-
-
-
     #takes the id of a book and returns a borrowing id if it's available
-    def borrowBook(self,bookID):
+    def borrowBook(self,bookID,LmsUserID):
+        exit = false
         print("--- Borrow a book ---")
         bookID = input("Enter the ID of the book: ")
         with Database() as db:
+            searchBook(bookID)
+            choice = input("Do you want to borrow this book? \n Y/N")
+            if choice == 'Y':
+                while (exit != true):
+                    insertBorrowedBook(bookID,LmsUserID)
+                    m.create_event(calendar_id='primary',)
+                    start = datetime.utcnow().isoformat() + "Z",
+                    e = GCAL.events().insert(calendarId='primary', 
+                    sendNotifications=True, body=EVENT).execute()
+                    if input("Do you want to borrow another book? \n Y/N") == "N":
+                        exit = true
             
-
-
-            m.create_event(calendar_id='<your calendar id>',
-            start= datetime.utcnow().isoformat() + "Z",
-            end='2017,12,5,15,15,00'
-
-
-
+        
+        
+        
+        #Find a book by bookID. 
+        #Print the book properties
+        #Ask for confirmation
+        #Assign the bookID < BookID >  
+        #Assign the current userID < LmsUserID > 
+        #Assign status enum 'borrowed' 
+        #Assign borrowedDate
+        #Assign returnedDate + 7 days + add the event on google calendar
 
     #takes a borrowing id and returns the book
-    def returnBook()
+    def returnBook():
+        print("--- Return a book ---")
+        print("1. List your books")
+        #Find returning book by the borrowedBookID < BorrowedBookID > 
+        #Check if borrowedBookID belongs to the current user and hasn't been returned 
+        #Assign status enum 'returned' 
+        #Remove the event from the user's google calendar
+        print("2. Return your book")
+        print("3. Exit")
