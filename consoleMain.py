@@ -28,8 +28,8 @@ class consoleMP:
         else:
             print("Invalid Input!")
 
-    def searchBook(self, bookTitle):
-        print("Search Results:")
+    def searchBook(self, bookDetail):
+        print("---Search Results:----")
         print("{:<15} {}".format("Book ID", "Title","Author", "Publish Date"))
         with Database() as db:
             for books in db.getBook():
@@ -38,7 +38,18 @@ class consoleMP:
 
 
     #takes the id of a book and returns a borrowing id if it's available
-    def borrowBook(self):
+    def borrowBook(self,bookID):
+        print("--- Borrow a book ---")
+        bookID = input("Enter the ID of the book: ")
+        with Database() as db:
+            
+
+
+            m.create_event(calendar_id='<your calendar id>',
+            start= datetime.utcnow().isoformat() + "Z",
+            end='2017,12,5,15,15,00'
+
+
 
 
     #takes a borrowing id and returns the book
