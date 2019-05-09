@@ -88,7 +88,7 @@ class Database:
         with self.connection.cursor() as cursor:
             sql_select = """"select * from Book where BookID = %s"""
             cursor.execute(sql_select,(bookDetail,))
-            for row in getBook():
+            for row in self.getBook():
                 print("Book ID: ", row[0],)
                 print("Title: ",row[1],)
                 print("Author: ",row[2],)
@@ -108,6 +108,19 @@ class Database:
             return cursor.fetchall()
             cursor.execute(
                 "select BorrowedBookID, LmsUserID, BookID, Status, BorrowedDate, ReturnedDate from BorrowedBook")
+    
+# searches for borrowed book specified in parameter
+    def searchBorrowedBook(self, bookBorrowedID):
+        with self.connection.cursor() as cursor:
+            sql_select = """"select * from BookBorrowed where BookBorrowedID = %s"""
+            cursor.execute(sql_select,(bookBorrowedID,))
+            for row in self.getBook():
+                print("Book Borrowed ID: ", row[0],)
+                print("LMS User ID ",row[1],)
+                print("BookID: ",row[2],)
+                print("Status: ",row[4])
+                print("Borrow Date",row[5])
+                print("Return Date",row[6])            
 
 
 Database()
