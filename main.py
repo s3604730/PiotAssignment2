@@ -10,12 +10,15 @@ os.chdir(path)
 
 
 
-class Main():
- def __init__(self):
-
   
 
  
+from classList.Menu import Menu
+
+
+class Main():
+    def __init__(self):
+        Menu()
 
 
 Main()

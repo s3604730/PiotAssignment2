@@ -6,19 +6,19 @@ from abc import ABC, ABCMeta, abstractmethod
 
 
 class UserSkeleton(ABC):
-    def __init__(self, userName, passWord, firstName, lastName, email):
+    def __init__(self, username, password, firstName, lastName, email):
         super().__init__()
-        self.__userName = userName
-        self.__passWord = passWord
+        self.__username = username
+        self.__password = password
         self.__firstName = firstName
         self.__lastName = lastName
         self.__email = email
 
-    def getUserName(self):
-        return self.__userName
+    def getUsername(self):
+        return self.__username
 
-    def getPassWord(self):
-        return self.__passWord
+    def getPassword(self):
+        return self.__password
 
     def getFirstName(self):
         return self.__firstName
@@ -27,4 +27,4 @@ class UserSkeleton(ABC):
         return self.__lastName
 
     def getEmail(self):
-     return self.__email
+        return self.__email
