@@ -12,6 +12,7 @@ os.chdir(path)
 
 class Main():
  def __init__(self):
+     MasterPiSocket.sendMessageLogoutSocket(self)
 
   
 
