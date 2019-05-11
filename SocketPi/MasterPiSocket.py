@@ -52,12 +52,13 @@ class MasterPiSocket(AbstractSocket):
                     # send success message back saying login was successful
                     successMessage = "Successfully logged into MASTER PI"
                     conn.sendall(successMessage.encode())
-                    break
+                    #break
+                    return userName
 
                 print("Disconnecting from client.")
         print("Closing listening socket.")
         print("Done.")
-        #
+        
 
     # Master pi sends a logout message to the reception pi
     def sendMessageLogoutSocket(self):
