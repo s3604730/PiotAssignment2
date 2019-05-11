@@ -3,7 +3,9 @@ from classList.User import User
 import hashlib
 import getpass
 import re
+from SocketPi.MasterPiSocket import MasterPiSocket
 
+from SocketPi.ReceptionPiSocket import ReceptionPiSocket
 
 class Menu():
     def __init__(self):
@@ -98,7 +100,10 @@ class Menu():
             print("Wrong login credentials")
             Menu()
         else:
-            print("Loged in successfully")
-        # use socket here
+            print("Logged in successfully")
+
+            # use socket here
+            ReceptionPiSocket.sendMessageLoginSocket(self, username)
+            
 
         # return user
