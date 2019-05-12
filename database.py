@@ -70,6 +70,14 @@ class Database:
             return cursor.fetchall()
             cursor.execute("select LmsUserID, UserName, Name from LmsUser")
 
+    def getUserID(self, userName):
+        with self.connection.cursor() as cursor:
+            cursor.execute("SELECT * FROM LmsUser WHERE UserName = %s", userName)
+            userID = self.cursor.fetchone()
+
+            return userID
+
+
 # insert book
     def insertBook(self, title, author, publishedDate):
         with self.connection.cursor() as cursor:
@@ -86,8 +94,8 @@ class Database:
 
     def searchBook(self, bookDetail):
         with self.connection.cursor() as cursor:
-            sql_select = """"select * from Book where BookID = %s"""
-            cursor.execute(sql_select,(bookDetail,))
+            sql_select = "select * from Book where BookID = %s"
+            cursor.execute(sql_select,bookDetail,)
             for row in self.getBook():
                 print("Book ID: ", row[0],)
                 print("Title: ",row[1],)
@@ -103,17 +111,22 @@ class Database:
         self.connection.commit()
 
 # get borrowed book
-    def getBorrowedBook(self):
+    def getBorrowedBook(self, LmsID):
         with self.connection.cursor() as cursor:
-            return cursor.fetchall()
-            cursor.execute(
-                "select BorrowedBookID, LmsUserID, BookID, Status, BorrowedDate, ReturnedDate from BorrowedBook")
+            cursor.execute("SELECT * FROM BookBorrowed WHERE LmsID = %s",LmsID)
+            for row in self.getBook():
+                print("Book Borrowed ID: ", row[0], )
+                print("LMS User ID ", row[1], )
+                print("BookID: ", row[2], )
+                print("Status: ", row[4])
+                print("Borrow Date", row[5])
+                print("Return Date", row[6])
     
 # searches for borrowed book specified in parameter
     def searchBorrowedBook(self, bookBorrowedID):
         with self.connection.cursor() as cursor:
-            sql_select = """"select * from BookBorrowed where BookBorrowedID = %s"""
-            cursor.execute(sql_select,(bookBorrowedID,))
+            sql_select = "SELECT * FROM BookBorrowed WHERE BookBorrowedID = %s"
+            cursor.execute(sql_select,bookBorrowedID,)
             for row in self.getBook():
                 print("Book Borrowed ID: ", row[0],)
                 print("LMS User ID ",row[1],)
