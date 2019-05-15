@@ -1,12 +1,11 @@
-from Database import Database
+from database import Database
 from Calendar import Calendar
 from datetime import datetime
 
 # stays idle if no message is sent from Reception Pi
 class consoleMP:
+
     def __init__(self):
-        with Database() as db:
-            db.createTables()
         self.initialise()
 
     def initialise(self):
@@ -15,10 +14,9 @@ class consoleMP:
         print("3: Return a book")
         print("4: Logout")
 
-        choice = int(input("Enter your choice"))
-        print()
+        choice = input("Enter your choice\n")
         if choice == "1":
-            bookTitle = str(input("Input Book TItle"))
+            bookTitle = str(input("Input Book Title\n"))
             self.searchBook(bookTitle)
         elif choice == "2":
             self.borrowBook()
@@ -62,7 +60,7 @@ class consoleMP:
         print("1. List your books")
         print("2. Return your book")
         print("3. Exit")
-        choice = int(input("Enter your choice"))
+        choice = input("Enter your choice")
         with Database() as db:
             if choice == "1":
                 db.getBorrowedBook(self.returnUserID())
@@ -87,3 +85,5 @@ class consoleMP:
         with Database() as db:
             return db.getUserID(userName)
 
+
+consoleMP()

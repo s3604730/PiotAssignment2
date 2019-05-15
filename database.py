@@ -73,7 +73,7 @@ class Database:
     def getUserID(self, userName):
         with self.connection.cursor() as cursor:
             cursor.execute("SELECT * FROM LmsUser WHERE UserName = %s", userName)
-            userID = self.cursor.fetchone()
+            userID = cursor.fetchone()
 
             return userID
 
