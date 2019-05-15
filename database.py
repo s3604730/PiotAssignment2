@@ -14,6 +14,7 @@ class Database:
             connection = mysql.connector.connect(
                 host=self.HOST, user=self.USER, password=self.PASSWORD, database=self.DATABASE)
         self.connection = connection
+        self.cursor = connection.cursor()
         print(connection)
 
     def close(self):
@@ -71,14 +72,17 @@ class Database:
             cursor.execute("select LmsUserID, UserName, Name from LmsUser")
 
     def getUserID(self, userName):
-        with self.connection.cursor() as cursor:
-            cursor.execute("SELECT * FROM LmsUser WHERE UserName = %s", userName)
-            userID = self.cursor.fetchone()
 
-            return userID
+        self.cursor.execute(
+            "SELECT * FROM Book WHERE BookID = %s", (userName,))
+        userID = self.cursor.fetchall()
+
+        return userID
 
 
 # insert book
+
+
     def insertBook(self, title, author, publishedDate):
         with self.connection.cursor() as cursor:
             cursor.execute(
@@ -87,23 +91,24 @@ class Database:
 
 # get book
     def getBook(self):
-        with self.connection.cursor() as cursor:
-            return cursor.fetchall()
-            cursor.execute(
-                "select BookID, Title, Author, PublishedDate from Book")
+        self.cursor.execute(
+            "select BookID, Title, Author, PublishedDate from Book")
+        res = self.cursor.fetchall()
+        return res
 
     def searchBook(self, bookDetail):
-        with self.connection.cursor() as cursor:
-            sql_select = "select * from Book where BookID = %s"
-            cursor.execute(sql_select,bookDetail,)
-            for row in self.getBook():
-                print("Book ID: ", row[0],)
-                print("Title: ",row[1],)
-                print("Author: ",row[2],)
-                print("Published Date: ",row[4])
 
-
+        sql_select = "select * from Book Where Title like %s OR Author like %s"
+        val = ("%" + str(bookDetail) + "%", "%" + str(bookDetail) + "%",)
+        self.cursor.execute(sql_select, val)
+        res = self.cursor.fetchall()
+        # for row in res:
+        #     print("Book ID: ", row[0])
+        #     print("Title: ", row[1])
+        #     print("Author: ", row[2])
+        print(res)
 # insert borrowed book
+
     def insertBorrowedBook(self, lmsuserID, bookID, status, borrowedDate, returnedDate):
         with self.connection.cursor() as cursor:
             cursor.execute("insert into BorrowedBook (LmsUserID, BookID, Status, BorrowedDate, ReturnedDate) values (%s,%s,%s,%s,%s)",
@@ -113,7 +118,8 @@ class Database:
 # get borrowed book
     def getBorrowedBook(self, LmsID):
         with self.connection.cursor() as cursor:
-            cursor.execute("SELECT * FROM BookBorrowed WHERE LmsID = %s",LmsID)
+            cursor.execute(
+                "SELECT * FROM BookBorrowed WHERE LmsID = %s", (LmsID,))
             for row in self.getBook():
                 print("Book Borrowed ID: ", row[0], )
                 print("LMS User ID ", row[1], )
@@ -121,19 +127,20 @@ class Database:
                 print("Status: ", row[4])
                 print("Borrow Date", row[5])
                 print("Return Date", row[6])
-    
+
 # searches for borrowed book specified in parameter
     def searchBorrowedBook(self, bookBorrowedID):
         with self.connection.cursor() as cursor:
             sql_select = "SELECT * FROM BookBorrowed WHERE BookBorrowedID = %s"
-            cursor.execute(sql_select,bookBorrowedID,)
+            cursor.execute(sql_select, bookBorrowedID,)
             for row in self.getBook():
                 print("Book Borrowed ID: ", row[0],)
-                print("LMS User ID ",row[1],)
-                print("BookID: ",row[2],)
-                print("Status: ",row[4])
-                print("Borrow Date",row[5])
-                print("Return Date",row[6])            
+                print("LMS User ID ", row[1],)
+                print("BookID: ", row[2],)
+                print("Status: ", row[4])
+                print("Borrow Date", row[5])
+                print("Return Date", row[6])
 
 
-Database()
+db = Database()
+db.searchBook("Mario")
