@@ -3,6 +3,8 @@ from Calendar import Calendar
 from datetime import datetime
 
 # stays idle if no message is sent from Reception Pi
+
+
 class consoleMP:
     def __init__(self):
         with Database() as db:
@@ -30,7 +32,7 @@ class consoleMP:
             print("Invalid Input!")
 
     # searches the table for the specified book
-    def searchBook(self,bookTitle):
+    def searchBook(self, bookTitle):
         with Database() as db:
             db.searchBook(bookTitle)
 
@@ -47,10 +49,11 @@ class consoleMP:
                     borrowDate = datetime.date(datetime.now())
                     returnDate = borrowDate - datetime.timedelta(days=7)
                     LmsUserID = input("Please enter your user ID")
-                    db.insertBorrowedBook(bookID,LmsUserID.bookID,"borrowed",borrowDate,returnDate)
+                    db.insertBorrowedBook(
+                        bookID, LmsUserID.bookID, "borrowed", borrowDate, returnDate)
                     # creates an event for the return date
                     e = Calendar()
-                    e.addEvent(borrowDate,returnDate,bookID)
+                    e.addEvent(borrowDate, returnDate, bookID)
                     if input("Do you want to borrow another book? \n Y/N") == "N":
                         exit = True
             else:
@@ -75,15 +78,11 @@ class consoleMP:
             if choice == "3":
                 self.initialise()
 
-
     def logout(self):
-        #TODO
+        # TODO
         '''sends logout message from MP to RP'''
-
-
 
     # get user name from reception pi through sockets
     def returnUserID(self, userName):
         with Database() as db:
             return db.getUserID(userName)
-
