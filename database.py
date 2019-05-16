@@ -97,6 +97,12 @@ class Database:
         res = self.cursor.fetchall()
         return res
 
+    def getBookByBookID(self, bookID):
+        self.cursor.execute(
+            "SELECT * FROM Book WHERE BookID = %s", (bookID,))
+        res = self.cursor.fetchone()
+        return res
+
     # searchBook
     def searchBooks(self, bookDetail):
         sql_select = "select * from Book Where Title like %s OR Author like %s"
@@ -116,28 +122,12 @@ class Database:
         self.cursor.execute(
             "SELECT * FROM BookBorrowed WHERE LmsUserID = %s AND status = 'borrowed'", (lmsUserID,))
         res = self.cursor.fetchall()
-        # printing should be in the console class, not here, database just return values
-        # for row in res:
-        #     print("Book Borrowed ID: ", row[0], )
-        #     print("LMS User ID ", row[1], )
-        #     print("BookID: ", row[2], )
-        #     print("Status: ", row[3])
-        #     print("Borrow Date", row[4])
-        #     print("Return Date", row[5])
         return res
 
     def getBorrowedBookByBookID(self, bookID):
         self.cursor.execute(
             "SELECT * FROM BookBorrowed WHERE BookID = %s AND status = 'borrowed'", (bookID,))
         res = self.cursor.fetchone()
-        # printing should be in the console class, not here, database just return values
-        # for row in res:
-        #     print("Book Borrowed ID: ", row[0], )
-        #     print("LMS User ID ", row[1], )
-        #     print("BookID: ", row[2], )
-        #     print("Status: ", row[3])
-        #     print("Borrow Date", row[4])
-        #     print("Return Date", row[5])
         return res
 
     # searches for borrowed book specified in parameter
@@ -145,19 +135,10 @@ class Database:
         self.cursor.execute(
             "SELECT * FROM BookBorrowed WHERE BookBorrowedID = %s AND status = 'borrowed'", (bookBorrowedID,))
         res = self.cursor.fetchone()
-        # printing should be in the console class, not here, database just return values
-        # for row in res:
-        #     print("Book Borrowed ID: ", row[0])
-        #     print("LMS User ID ", row[1])
-        #     print("BookID: ", row[2])
-        #     print("Status: ", row[3])
-        #     print("Borrow Date", row[4])
-        #     print("Return Date", row[5])
         return res
 
     # set status to "returned", may update return date later
-
-    def returnBook(self, bookBorrowedID):
+    def setReturnedBook(self, bookBorrowedID):
         self.cursor.execute("UPDATE BookBorrowed SET Status = 'returned' WHERE BookBorrowedID = %s",
                             (bookBorrowedID,))
         self.connection.commit()
@@ -165,3 +146,7 @@ class Database:
     def clearTable(self, tableName):
         self.cursor.execute("DELETE FROM " + tableName)
         self.connection.commit()
+
+
+# db = Database()
+# print(db.getBookByBookID("fesad"))
