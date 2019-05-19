@@ -88,7 +88,12 @@ class Database:
         self.cursor.execute(
             "SELECT LmsUserID FROM LmsUser WHERE UserName = %s", (userName,))
         res = self.cursor.fetchone()
-        return res[0]
+        
+        
+        if res is None:
+            return "None"
+        else:
+            return res[0]
 
     # get all books
     def getAllBooks(self):

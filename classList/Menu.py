@@ -9,20 +9,21 @@ from SocketPi.ReceptionPiSocket import ReceptionPiSocket
 
 class Menu():
     def __init__(self):
-        choice = 0
-        while(choice != "1" and choice != "2" and choice != "3"):
-            print("1. Create a new account")
-            print("2. Log in")
-            print("3. Quit")
+        while(True):
+            choice = 0
+            while(choice != "1" and choice != "2" and choice != "3"):
+                print("1. Create a new account")
+                print("2. Log in")
+                print("3. Quit")
 
-            choice = input("Enter your choice: ")
+                choice = input("Enter your choice: ")
 
-        if(choice == "1"):
-            self.registerUser()
-        elif(choice == "2"):
-            self.loginUser()
-        elif(choice == "3"):
-            pass
+            if(choice == "1"):
+                self.registerUser()
+            elif(choice == "2"):
+                self.loginUser()
+            elif(choice == "3"):
+                pass
 
     def registerUser(self):
         db = Database()
@@ -81,7 +82,7 @@ class Menu():
         user = User(username, hashedPassword, firstName, lastName, email)
         db.insertUser(user)
         print(username + " has been registered!")
-
+        
     def loginUser(self):
         username = ""
         while(username == ""):
@@ -103,7 +104,7 @@ class Menu():
             print("Logged in successfully")
 
             # use socket here
-            ReceptionPiSocket.sendMessageLoginSocket(self, username)
+            #ReceptionPiSocket.sendMessageLoginSocket(self, username)
             
 
         # return user
