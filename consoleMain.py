@@ -83,7 +83,7 @@ class consoleMP:
                 print("Sorry! This book is currently not available.")
             else:
                 borrowDate = datetime.date(datetime.now())
-                returnDate = borrowDate - timedelta(days=7)
+                returnDate = borrowDate + timedelta(days=7)
                 # user should not be asked about user ID after login
                 # LmsUserID = input("Please enter your user ID")
                 # will get userID later
