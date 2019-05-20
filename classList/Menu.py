@@ -22,6 +22,8 @@ class Menu():
                 self.registerUser()
             elif(choice == "2"):
                 self.loginUser()
+                #socket for waiting for logout socket
+                #ReceptionPiSocket.receiveMessageLogoutSocket(self)
             elif(choice == "3"):
                 pass
 
@@ -104,7 +106,7 @@ class Menu():
             print("Logged in successfully")
 
             # use socket here
-            #ReceptionPiSocket.sendMessageLoginSocket(self, username)
+            ReceptionPiSocket.sendMessageLoginSocket(self, username)
             
 
         # return user

@@ -17,9 +17,9 @@ class consoleMP:
     def initialise(self):
         while(True):
             #receiving username
-            user_name = "Fdsfads"
+            #user_name = "Fdsfads"
             #This is for sockets
-            #user_name = MasterPiSocket.receiveMessageLoginSocket(self)
+            user_name = MasterPiSocket.receiveMessageLoginSocket(self)
             #self.db.insertUser("harryle")
 
             #check if the username is already in the masterpi. 

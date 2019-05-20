@@ -6,6 +6,7 @@
 from SocketPi.AbstractSocket import AbstractSocket
 import socket
 
+
 # Master pi class refers to the abstract socket class
 
 class MasterPiSocket(AbstractSocket):
@@ -62,7 +63,7 @@ class MasterPiSocket(AbstractSocket):
 
     # Master pi sends a logout message to the reception pi
     def sendMessageLogoutSocket(self):
-        HOST = "10.132.143.228"  # The server's hostname or IP address.
+        HOST = "10.132.139.243"  # The server's hostname or IP address.
         PORT = 65000         # The port used by the server. s
         ADDRESS = (HOST, PORT)
         # sending message
