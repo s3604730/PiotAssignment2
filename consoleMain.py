@@ -8,6 +8,8 @@ import os
 from SocketPi.ReceptionPiSocket import ReceptionPiSocket
 path = os.path.abspath(os.path.dirname(__file__))
 os.chdir(path)
+
+
 class consoleMP:
     def __init__(self):
         self.db = Database()
@@ -16,28 +18,28 @@ class consoleMP:
 
     def initialise(self):
         while(True):
-            #receiving username
+            # receiving username
             #user_name = "Fdsfads"
-            #This is for sockets
+            # This is for sockets
             user_name = MasterPiSocket.receiveMessageLoginSocket(self)
-            #self.db.insertUser("harryle")
+            # self.db.insertUser("harryle")
 
-            #check if the username is already in the masterpi. 
-            #if not then add it 
+            # check if the username is already in the masterpi.
+            # if not then add it
             if self.returnUserID(user_name) == "None":
                 print("Registering User into Masterpi")
                 self.db.insertUser(user_name)
             else:
                 print("Logged in")
 
-            #print(self.db.getAllUsers())
-                
+            # print(self.db.getAllUsers())
+
             while(True):
                 print("1: Search a book")
                 print("2: Borrow a book")
                 print("3: Return a book")
                 print("4: Logout")
-                
+
                 choice = input("Enter your choice: ")
                 if choice == "1":
                     bookTitle = str(input("Input Book Title: "))
@@ -51,9 +53,9 @@ class consoleMP:
                     break
                 else:
                     print("Invalid Input!")
-                
 
     # searches the table for the specified book
+
     def searchBook(self, input):
         res = self.db.searchBooks(input)
         for row in res:
@@ -70,7 +72,7 @@ class consoleMP:
         # no book found, return menu
         if book == None:
             print("Book Not Found!")
-            #self.initialise()
+            # self.initialise()
             return
         # if found, display book
         self.output.displayBook(book)
@@ -99,7 +101,7 @@ class consoleMP:
             return
 
     # takes a borrowing id and returns the book
-    def returnBook(self,user_name):
+    def returnBook(self, user_name):
         print("--- Return a book ---")
         print("1. List your books")
         print("2. Return your book")
@@ -126,14 +128,14 @@ class consoleMP:
             # e = Calendar()
             # e.removeEvent()
         if choice == "3":
-            #self.initialise()
+            # self.initialise()
             return
 
     def logout(self):
         # TODO
         '''sends logout message from MP to RP'''
-        #MasterPiSocket.sendMessageLogoutSocket(self)
-        #self.initialise()
+        MasterPiSocket.sendMessageLogoutSocket(self)
+        # self.initialise()
         print("yeet")
         return
 

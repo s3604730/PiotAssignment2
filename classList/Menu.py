@@ -7,6 +7,7 @@ from SocketPi.MasterPiSocket import MasterPiSocket
 
 from SocketPi.ReceptionPiSocket import ReceptionPiSocket
 
+
 class Menu():
     def __init__(self):
         while(True):
@@ -22,8 +23,8 @@ class Menu():
                 self.registerUser()
             elif(choice == "2"):
                 self.loginUser()
-                #socket for waiting for logout socket
-                #ReceptionPiSocket.receiveMessageLogoutSocket(self)
+                # socket for waiting for logout socket
+                ReceptionPiSocket.receiveMessageLogoutSocket(self)
             elif(choice == "3"):
                 pass
 
@@ -84,7 +85,7 @@ class Menu():
         user = User(username, hashedPassword, firstName, lastName, email)
         db.insertUser(user)
         print(username + " has been registered!")
-        
+
     def loginUser(self):
         username = ""
         while(username == ""):
@@ -107,6 +108,5 @@ class Menu():
 
             # use socket here
             ReceptionPiSocket.sendMessageLoginSocket(self, username)
-            
 
         # return user
