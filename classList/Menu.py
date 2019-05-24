@@ -6,16 +6,18 @@ import re
 from SocketPi.MasterPiSocket import MasterPiSocket
 
 from SocketPi.ReceptionPiSocket import ReceptionPiSocket
-
+from classList.CaptureCam import CaptureCam
 
 class Menu():
     def __init__(self):
         while(True):
             choice = 0
-            while(choice != "1" and choice != "2" and choice != "3"):
+            while(choice != "1" and choice != "2" and choice != "3" and choice != "4" and choice != "5"):
                 print("1. Create a new account")
                 print("2. Log in")
-                print("3. Quit")
+                print("3. Register user face to account")
+                print("4. Login using face")
+                print("5. Quit")
 
                 choice = input("Enter your choice: ")
 
@@ -25,7 +27,17 @@ class Menu():
                 self.loginUser()
                 # socket for waiting for logout socket
                 ReceptionPiSocket.receiveMessageLogoutSocket(self)
+
             elif(choice == "3"):
+                user_name = self.register_user_face()
+                if (user_name != "None"):
+                    CaptureCam.capture(self, user_name)
+                    print(user_name)
+                
+
+            elif(choice == "4"):
+                 pass
+            elif(choice == "5"):
                 pass
 
     def registerUser(self):
@@ -110,3 +122,38 @@ class Menu():
             ReceptionPiSocket.sendMessageLoginSocket(self, username)
 
         # return user
+
+    def login_User_Face(self):
+        username = ""
+        
+        while(username == ""):
+            username = input("Enter username: ")
+        db = Database()
+        a = db.findUserByUsername(username)
+        if a == "None":
+            print("Cannot find user")
+            return "None"
+        else:
+            print("Found user")
+        return username
+        pass
+    
+    def register_user_face(self):
+        username = ""
+        
+        while(username == ""):
+            username = input("Enter username: ")
+        db = Database()
+        a = db.findUserByUsername(username)
+        if str(a) == "None":
+            print("Cannot find user")
+            
+            return "None"
+        else:
+            print("Found user")
+            username = str(a[1])
+            return username
+        
+        
+        
+        

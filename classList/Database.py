@@ -6,8 +6,10 @@ from classList.User import User
 
 class Database():
     # mysql config of Pi
+    #iot2user for tony database
+    #otherwise root for everyone else
     host = "localhost"
-    user = "root"
+    user = "iot2user"
     password = ""
     database = "iot2"
 
