@@ -3,6 +3,7 @@ from classList.User import User
 import hashlib
 import getpass
 import re
+import time
 from SocketPi.MasterPiSocket import MasterPiSocket
 
 from SocketPi.ReceptionPiSocket import ReceptionPiSocket
@@ -27,6 +28,7 @@ class Menu():
                 self.registerUser()
             elif(choice == "2"):
                 self.loginUser()
+                time.sleep(2)
                 # socket for waiting for logout socket
                 ReceptionPiSocket.receiveMessageLogoutSocket(self)
 
@@ -39,9 +41,12 @@ class Menu():
                 
 
             elif(choice == "4"):
-                user_name = RecogniseCam()
+                user_name = RecogniseCam.running_Recognise_Cam(self)
                 print(user_name)
-                pass
+                ReceptionPiSocket.sendMessageLoginSocket(self, user_name)
+                time.sleep(2)
+                ReceptionPiSocket.receiveMessageLogoutSocket(self)
+                
             elif(choice == "5"):
                 pass
 

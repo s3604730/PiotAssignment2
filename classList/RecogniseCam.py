@@ -23,6 +23,10 @@ os.chdir(path)
 
 class RecogniseCam():
     def __init__(self):
+        pass
+
+
+    def running_Recognise_Cam(self):
         ap = argparse.ArgumentParser()
         ap.add_argument("-e", "--encodings", default="encodings.pickle",
         help="path to serialized db of facial encodings")
@@ -94,9 +98,10 @@ class RecogniseCam():
                 # Set a flag to sleep the cam for fixed time
                 time.sleep(3.0)
                 user_name = name
-            print (user_name)
+            print (user_name + " FDSAFADSF")
 
-            if user_name != "Unknown":
+            if (user_name != "Unknown" ) and (user_name != "") :
                 # do a bit of cleanup
+                print("fdsfasdfds")
                 vs.stop()
                 return user_name
