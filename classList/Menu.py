@@ -28,7 +28,7 @@ class Menu():
                 self.registerUser()
             elif(choice == "2"):
                 self.loginUser()
-                time.sleep(2)
+                
                 # socket for waiting for logout socket
                 ReceptionPiSocket.receiveMessageLogoutSocket(self)
 
@@ -44,7 +44,7 @@ class Menu():
                 user_name = RecogniseCam.running_Recognise_Cam(self)
                 print(user_name)
                 ReceptionPiSocket.sendMessageLoginSocket(self, user_name)
-                time.sleep(2)
+                
                 ReceptionPiSocket.receiveMessageLogoutSocket(self)
                 
             elif(choice == "5"):
