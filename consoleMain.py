@@ -8,7 +8,7 @@ import os
 from SocketPi.ReceptionPiSocket import ReceptionPiSocket
 path = os.path.abspath(os.path.dirname(__file__))
 os.chdir(path)
-
+import time
 
 class consoleMP:
     def __init__(self):
@@ -136,6 +136,7 @@ class consoleMP:
         '''sends logout message from MP to RP'''
         MasterPiSocket.sendMessageLogoutSocket(self)
         # self.initialise()
+        time.sleep(2)
         print("yeet")
         return
 

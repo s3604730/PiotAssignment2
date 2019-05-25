@@ -64,7 +64,7 @@ class MasterPiSocket(AbstractSocket):
     # Master pi sends a logout message to the reception pi
     def sendMessageLogoutSocket(self):
         HOST = "192.168.0.12"  # The server's hostname or IP address.
-        PORT = 65001         # The port used by the server. s
+        PORT = 65000         # The port used by the server. s
         ADDRESS = (HOST, PORT)
         # sending message
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
