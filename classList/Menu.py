@@ -7,6 +7,8 @@ from SocketPi.MasterPiSocket import MasterPiSocket
 
 from SocketPi.ReceptionPiSocket import ReceptionPiSocket
 from classList.CaptureCam import CaptureCam
+from classList.EncodeCam import EncodeCam
+from classList.RecogniseCam import RecogniseCam
 
 class Menu():
     def __init__(self):
@@ -32,10 +34,13 @@ class Menu():
                 user_name = self.register_user_face()
                 if (user_name != "None"):
                     CaptureCam.capture(self, user_name)
+                    EncodeCam()
                     print(user_name)
                 
 
             elif(choice == "4"):
+                user_name = RecogniseCam()
+                print(user_name)
                  pass
             elif(choice == "5"):
                 pass
