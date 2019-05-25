@@ -41,7 +41,7 @@ class Menu():
             elif(choice == "4"):
                 user_name = RecogniseCam()
                 print(user_name)
-                 pass
+                pass
             elif(choice == "5"):
                 pass
 

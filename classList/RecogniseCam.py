@@ -16,7 +16,7 @@ import imutils
 import pickle
 import time
 import cv2
-
+import os
 path = os.path.abspath(os.path.dirname(__file__))
 os.chdir(path)
 # construct the argument parser and parse the arguments
@@ -94,9 +94,9 @@ class RecogniseCam():
                 # Set a flag to sleep the cam for fixed time
                 time.sleep(3.0)
                 user_name = name
-            print user_name
+            print (user_name)
 
-        if user_name != "Unknown":
-            # do a bit of cleanup
-            vs.stop()
-            return user_name
+            if user_name != "Unknown":
+                # do a bit of cleanup
+                vs.stop()
+                return user_name
