@@ -35,3 +35,4 @@ Robin Kwan<br/>
 * Run consoleMain.py and enter authentication key given from browser prompt
 * Run consoleMain.py on the reception Pi and main.py on the master pi.
 * The reception pi remains idle while the user interacts with the master pi
+* For admin privileges, run flask_main.py 
