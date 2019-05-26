@@ -196,7 +196,12 @@ class Database:
             "SELECT * FROM BookBorrowed WHERE BookID = %s AND status = 'borrowed'", (bookID,))
         res = self.cursor.fetchone()
         return res
-
+        
+    def getBookIDByBorrowedBookID(self, borrowedBookID):
+        self.cursor.execute(
+            "SELECT BookID FROM BookBorrowed WHERE BookBorrowedID = %s AND status = 'borrowed'", (borrowedBookID,))
+        res = self.cursor.fetchone()
+        return res 
     # searches for borrowed book specified in parameter
     def getBorrowedBookByBorrowedBookID(self, bookBorrowedID):
         """
