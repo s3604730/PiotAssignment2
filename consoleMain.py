@@ -14,6 +14,7 @@ class consoleMP:
     def __init__(self):
         self.db = Database()
         self.output = Output()
+        self.cal = Calendar()
         self.initialise()
 
     def initialise(self):
@@ -89,6 +90,7 @@ class consoleMP:
                 # will get userID later
                 self.db.insertBorrowedBook(
                     self.db.getUserIDByUserName(user_name), bookID, borrowDate, returnDate)
+                self.cal.addEvent(bookID,user_name)
             # creates an event for the return date
             # e = Calendar()
             # e.addEvent(borrowDate, returnDate, bookID)
@@ -122,6 +124,7 @@ class consoleMP:
                 print("No Book Found!")
                 self.returnBook(user_name)
             else:
+                self.cal.removeEvent(self.db.getBookIDByBorrowedBookID(borrowedBookID))
                 self.db.setReturnedBook(borrowedBookID)
                 print("Book has been returned!")
                 self.returnBook(user_name)
