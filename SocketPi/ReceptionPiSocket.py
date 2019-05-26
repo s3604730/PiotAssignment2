@@ -13,11 +13,28 @@ import json
 
 
 class ReceptionPiSocket(AbstractSocket):
+    """
+    This class acts as a socket for communication for the reception pi
+    This class includes the functions 
+        - Send a login message through Socket
+        - Receive message logout socket
+    """
+
     def __init__(self):
         pass
     # send message from reception pi to master pi
 
     def sendMessageLoginSocket(self, userName):
+
+        """
+        This method sends a login message through sockets to master
+        pi and sends the username. 
+
+        param1: 'user_name' username is sent to the receiving socket
+
+
+
+        """
         HOST = '10.132.81.57'  # The server's hostname or IP address.
         PORT = 65000         # The port used by the server. s
         ADDRESS = (HOST, PORT)
@@ -57,7 +74,10 @@ class ReceptionPiSocket(AbstractSocket):
 
     # reception pi receives the logout message and the username
     def receiveMessageLogoutSocket(self):
-
+        """
+        This method receives a message for logout 
+        
+        """
         HOST = ""
 
         # Note "0.0.0.0" also works but only with IPv4.

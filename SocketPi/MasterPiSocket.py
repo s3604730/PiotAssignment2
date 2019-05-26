@@ -8,6 +8,14 @@ import socket
 import json
 
 class MasterPiSocket(AbstractSocket):
+    """
+    This class acts as a socket for communication for the Master pi
+    This class includes the functions
+        - Send logout message through Socket
+        - Receive message login socket with username
+    
+
+    """
     def __init__(self):
         pass
     # skip because master pi doesn't send login username
@@ -17,6 +25,10 @@ class MasterPiSocket(AbstractSocket):
     # Master pi receiving a login message from reception pi
 
     def receiveMessageLoginSocket(self):
+        """
+        This method receives the login username socket
+
+        """
         HOST = ""
 
         # Note "0.0.0.0" also works but only with IPv4.
@@ -61,6 +73,9 @@ class MasterPiSocket(AbstractSocket):
 
     # Master pi sends a logout message to the reception pi
     def sendMessageLogoutSocket(self):
+        """
+        This method sends a logout message towards the reception pi
+        """
         HOST = '10.132.81.57'  # The server's hostname or IP address.
         PORT = 65001         # The port used by the server. s
         ADDRESS = (HOST, PORT)
