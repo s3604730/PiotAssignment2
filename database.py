@@ -90,11 +90,12 @@ class Database:
 
     # insert user
     def insertUser(self, username):
-         """
+        """
         Insert 'username' parameter into UserName in LmsUser table 
             param1: 'username' 
         """
         try:
+
             self.cursor.execute(
                 "insert into LmsUser (UserName) values (%s)", (username, ))
             self.connection.commit()
