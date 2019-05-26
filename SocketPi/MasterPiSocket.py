@@ -5,9 +5,14 @@
 
 from SocketPi.AbstractSocket import AbstractSocket
 import socket
-
+import json
+import os
+path = os.path.abspath(os.path.dirname(__file__))
+os.chdir(path)
 
 # Master pi class refers to the abstract socket class
+with open("config.json", "r") as file:
+    ipaddress = json.load(file)
 
 class MasterPiSocket(AbstractSocket):
     def __init__(self):
@@ -63,8 +68,8 @@ class MasterPiSocket(AbstractSocket):
 
     # Master pi sends a logout message to the reception pi
     def sendMessageLogoutSocket(self):
-        HOST = "192.168.0.12"  # The server's hostname or IP address.
-        PORT = 65000         # The port used by the server. s
+        HOST = ipaddress["receptionpi_ip"]  # The server's hostname or IP address.
+        PORT = 65001         # The port used by the server. s
         ADDRESS = (HOST, PORT)
         # sending message
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:

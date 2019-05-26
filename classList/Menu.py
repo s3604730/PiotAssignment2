@@ -17,9 +17,9 @@ class Menu():
             choice = 0
             while(choice != "1" and choice != "2" and choice != "3" and choice != "4" and choice != "5"):
                 print("1. Create a new account")
-                print("2. Log in")
+                print("2. Log in (Wait around 1 minute after logout to login again)")
                 print("3. Register user face to account")
-                print("4. Login using face")
+                print("4. Login using face (Wait around 1 minute after logout to login again)")
                 print("5. Quit")
 
                 choice = input("Enter your choice: ")
@@ -28,7 +28,7 @@ class Menu():
                 self.registerUser()
             elif(choice == "2"):
                 self.loginUser()
-                
+                time.sleep(60)   
                 # socket for waiting for logout socket
                 ReceptionPiSocket.receiveMessageLogoutSocket(self)
 
@@ -44,7 +44,7 @@ class Menu():
                 user_name = RecogniseCam.running_Recognise_Cam(self)
                 print(user_name)
                 ReceptionPiSocket.sendMessageLoginSocket(self, user_name)
-                
+                time.sleep(60)
                 ReceptionPiSocket.receiveMessageLogoutSocket(self)
                 
             elif(choice == "5"):

@@ -38,7 +38,7 @@ class consoleMP:
                 print("1: Search a book")
                 print("2: Borrow a book")
                 print("3: Return a book")
-                print("4: Logout")
+                print("4: Logout (Wait around 60 seconds upon logging in)")
 
                 choice = input("Enter your choice: ")
                 if choice == "1":
@@ -136,8 +136,8 @@ class consoleMP:
         '''sends logout message from MP to RP'''
         MasterPiSocket.sendMessageLogoutSocket(self)
         # self.initialise()
-        time.sleep(2)
-        print("yeet")
+        time.sleep(60)
+      
         return
 
     # get user name from reception pi through sockets
