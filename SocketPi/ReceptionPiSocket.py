@@ -18,7 +18,7 @@ class ReceptionPiSocket(AbstractSocket):
     # send message from reception pi to master pi
 
     def sendMessageLoginSocket(self, userName):
-        HOST = '10.132.136.92'  # The server's hostname or IP address.
+        HOST = '10.132.81.57'  # The server's hostname or IP address.
         PORT = 65000         # The port used by the server. s
         ADDRESS = (HOST, PORT)
 
@@ -29,8 +29,8 @@ class ReceptionPiSocket(AbstractSocket):
             print("Connected.")
 
             # Send a message for login successful
-            yeet = "Login Successful!"
-            s.sendall(yeet.encode())
+            loginMsg = "Login Successful!"
+            s.sendall(loginMsg.encode())
 
             # Receive a message requesting for Username
             data = s.recv(4096)

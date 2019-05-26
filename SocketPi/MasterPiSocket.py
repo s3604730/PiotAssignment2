@@ -61,7 +61,7 @@ class MasterPiSocket(AbstractSocket):
 
     # Master pi sends a logout message to the reception pi
     def sendMessageLogoutSocket(self):
-        HOST = '131.170.239.12'  # The server's hostname or IP address.
+        HOST = '10.132.81.57'  # The server's hostname or IP address.
         PORT = 65001         # The port used by the server. s
         ADDRESS = (HOST, PORT)
         # sending message
@@ -71,8 +71,8 @@ class MasterPiSocket(AbstractSocket):
             print("Connected.")
             logout_message = "Logout Successful"
             # Send a message for logout
-            yeet = "Logout Successful!"
-            s.sendall(yeet.encode())
+            loginMsg = "Logout Successful!"
+            s.sendall(loginMsg.encode())
 
             # Receive a message requesting for logout message
             data = s.recv(4096)
