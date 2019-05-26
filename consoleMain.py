@@ -188,7 +188,7 @@ class consoleMP:
         """
         MasterPiSocket.sendMessageLogoutSocket(self)
         # self.initialise()
-        time.sleep(2)
+        time.sleep(60)
         return
 
     # get user name from reception pi through sockets
