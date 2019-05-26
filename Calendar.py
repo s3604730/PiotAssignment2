@@ -62,9 +62,14 @@ class Calendar:
         Removes an event from the calendar of the library then 
         print " Book returned " message on the console.
         """
-        listEvents = self.service.events().list(calendarId = "primary", q = bookID).execute()
-        getEvents = listEvents.get("items", [])
-        for event in getEvents:
-            eventId = event['id']
-        event = self.service.events().delete(calendarId='primary', eventId= eventId).execute()
-        print('Event removed from calendar')
+        try:
+            listEvents = self.service.events().list(calendarId = "primary", q = bookID).execute()
+            getEvents = listEvents.get("items", [])
+            for event in getEvents:
+                eventId = event['id']
+            event = self.service.events().delete(calendarId='primary', eventId= eventId).execute()
+            print('Event removed from calendar')
+        except:
+            print("Doesn't exist on calendar")
+            pass
+            
