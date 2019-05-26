@@ -98,10 +98,10 @@ class RecogniseCam():
                 # Set a flag to sleep the cam for fixed time
                 time.sleep(3.0)
                 user_name = name
-            print (user_name + " FDSAFADSF")
+            
 
             if (user_name != "Unknown" ) and (user_name != "") :
-                # do a bit of cleanup
-                print("fdsfasdfds")
+             
+                
                 vs.stop()
                 return user_name
