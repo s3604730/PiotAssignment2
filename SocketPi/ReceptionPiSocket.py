@@ -8,7 +8,6 @@ from SocketPi.AbstractSocket import AbstractSocket
 import json
 
 
-
 # class for reception pi based on abstract
 
 
@@ -18,7 +17,7 @@ class ReceptionPiSocket(AbstractSocket):
     # send message from reception pi to master pi
 
     def sendMessageLoginSocket(self, userName):
-        HOST = "10.132.139.243"  # The server's hostname or IP address.
+        HOST = "10.132.129.164"  # The server's hostname or IP address.
         PORT = 65000         # The port used by the server. s
         ADDRESS = (HOST, PORT)
 

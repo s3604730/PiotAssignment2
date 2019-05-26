@@ -9,13 +9,13 @@ class Database():
     host = "localhost"
     user = "iot2user"
     password = ""
-    database = "iot2"
+    database = "testing"
 
     def __init__(self, testing=False):
         # populate database and tables if they don't exist
-        if(testing == True):
-            self.database = "testing"
-        self.createDatabase()
+        # if(testing == True):
+        #     self.database = "testing"
+        # self.createDatabase()
         self.createTableUser()
 
         # connect to database
@@ -28,7 +28,7 @@ class Database():
     def createDatabase(self):
         con = mysql.connector.connect(
             host=self.host, user=self.user, password=self.password)
-        stm = "CREATE DATABASE IF NOT EXISTS iot2"
+        stm = "CREATE DATABASE IF NOT EXISTS testing"
         con.cursor().execute(stm)
         con.commit()
 
@@ -78,3 +78,8 @@ class Database():
         res = self.cursor.fetchone()
 
         return res
+
+    # find user by credentials to verify login details
+    def clearDatabase(self):
+        self.cursor.execute("DELETE FROM users")
+        self.con.commit()

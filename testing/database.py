@@ -9,7 +9,9 @@ class Database:
     PASSWORD = ""
     DATABASE = "piotassignment2"
 
-    def __init__(self, connection=None):
+    def __init__(self, connection=None, testing=False):
+        if(testing == True):
+            self.DATABASE = "testing"
         if(connection == None):
             connection = mysql.connector.connect(
                 host=self.HOST, user=self.USER, password=self.PASSWORD, database=self.DATABASE)
