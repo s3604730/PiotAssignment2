@@ -17,7 +17,7 @@ class Calendar:
             creds = tools.run_flow(flow, store)
         self.service = build("calendar", "v3", credentials=creds)
 
-    def addEvent(self, startDate, endDate, bookID):
+    def addEvent(self, bookID,userName):
         """ 
         Adds an event to the Calendar of the library for 7 days when a book is borrowed
         with details of 
@@ -56,7 +56,8 @@ class Calendar:
         event = self.service.events().insert(calendarId = "primary", body = event).execute()
         print("Book return date added to calendar")
 
-    def removeEvent(self):
+    def removeEvent(self, bookID):
+        
         """
         Removes an event from the calendar of the library then 
         print " Book returned " message on the console.

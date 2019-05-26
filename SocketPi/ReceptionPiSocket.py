@@ -35,7 +35,7 @@ class ReceptionPiSocket(AbstractSocket):
 
 
         """
-        HOST = '10.132.81.57'  # The server's hostname or IP address.
+        HOST = '10.132.136.92'  # The server's hostname or IP address.
         PORT = 65000         # The port used by the server. s
         ADDRESS = (HOST, PORT)
 
@@ -76,7 +76,7 @@ class ReceptionPiSocket(AbstractSocket):
     def receiveMessageLogoutSocket(self):
         """
         This method receives a message for logout 
-        
+
         """
         HOST = ""
 
