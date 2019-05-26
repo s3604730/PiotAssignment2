@@ -7,13 +7,7 @@ import socket
 from SocketPi.AbstractSocket import AbstractSocket
 import json
 
-import os
-path = os.path.abspath(os.path.dirname(__file__))
-os.chdir(path)
 
-
-with open("config.json", "r") as file:
-    ipaddress = json.load(file)
 
 # class for reception pi based on abstract
 
@@ -24,7 +18,7 @@ class ReceptionPiSocket(AbstractSocket):
     # send message from reception pi to master pi
 
     def sendMessageLoginSocket(self, userName):
-        HOST = ipaddress["masterpi_ip"]  # The server's hostname or IP address.
+        HOST = '10.132.136.92'  # The server's hostname or IP address.
         PORT = 65000         # The port used by the server. s
         ADDRESS = (HOST, PORT)
 
