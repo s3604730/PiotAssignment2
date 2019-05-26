@@ -12,14 +12,22 @@ from classList.EncodeCam import EncodeCam
 from classList.RecogniseCam import RecogniseCam
 
 class Menu():
+    """
+    This class acts as the Reception Pi console controller
+    It includes the functions 
+        - Register user
+        - Login user
+        - Register via face
+        - Login via face
+    """
     def __init__(self):
         while(True):
             choice = 0
             while(choice != "1" and choice != "2" and choice != "3" and choice != "4" and choice != "5"):
                 print("1. Create a new account")
-                print("2. Log in (Wait around 1 minute after logout to login again)")
+                print("2. Log in")
                 print("3. Register user face to account")
-                print("4. Login using face (Wait around 1 minute after logout to login again)")
+                print("4. Login using face")
                 print("5. Quit")
 
                 choice = input("Enter your choice: ")
@@ -28,7 +36,7 @@ class Menu():
                 self.registerUser()
             elif(choice == "2"):
                 self.loginUser()
-                time.sleep(60)   
+                
                 # socket for waiting for logout socket
                 ReceptionPiSocket.receiveMessageLogoutSocket(self)
 
@@ -44,13 +52,36 @@ class Menu():
                 user_name = RecogniseCam.running_Recognise_Cam(self)
                 print(user_name)
                 ReceptionPiSocket.sendMessageLoginSocket(self, user_name)
-                time.sleep(60)
+                
                 ReceptionPiSocket.receiveMessageLogoutSocket(self)
                 
             elif(choice == "5"):
                 pass
 
     def registerUser(self):
+        """
+        This function prints
+            ("Enter username: ")
+            ("Enter first name: ")
+            ("Enter last name: ")
+            ("Enter email: ")
+            ("Enter password: ")
+            ("Confirm password: ")   in order. 
+        Register user by entering username, firstname, lastname, email, password and password confirmation.
+    
+        If the username already exists in the users table, it will print.
+            ("This username already exists.")
+        If the firstname or lastname is empty, it will print.
+            ("Input is invalid!")
+        If the email does not pass the validation, it will print.
+            ("Email is not valid")
+        If the password and password confirmation do not match, it will print.
+            ("Passwords do not match")
+        
+        Upon success it inserts the user detail into users table
+        and prints
+            (<_username_> has been registered!")
+        """
         db = Database()
 
         username = ""
@@ -109,6 +140,9 @@ class Menu():
         print(username + " has been registered!")
 
     def loginUser(self):
+        """
+        Receive username and password input from the user.
+        """
         username = ""
         while(username == ""):
             username = input("Enter username: ")
@@ -163,7 +197,3 @@ class Menu():
             print("Found user")
             username = str(a[1])
             return username
-        
-        
-        
-        
