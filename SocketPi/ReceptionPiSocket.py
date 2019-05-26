@@ -8,7 +8,6 @@ from SocketPi.AbstractSocket import AbstractSocket
 import json
 
 
-
 # class for reception pi based on abstract
 
 
