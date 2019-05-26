@@ -12,6 +12,14 @@ from classList.EncodeCam import EncodeCam
 from classList.RecogniseCam import RecogniseCam
 
 class Menu():
+    """
+    This class acts as the Reception Pi console controller
+    It includes the functions 
+        - Register user
+        - Login user
+        - Register via face
+        - Login via face
+    """
     def __init__(self):
         while(True):
             choice = 0
@@ -51,6 +59,40 @@ class Menu():
                 pass
 
     def registerUser(self):
+        """
+        This function prints
+
+            ("Enter username: ")
+            ("Enter first name: ")
+            ("Enter last name: ")
+            ("Enter email: ")
+            ("Enter password: ")
+            ("Confirm password: ")   in order. 
+
+        Register user by entering username, firstname, lastname, email, password and password confirmation.
+    
+        If the username already exists in the users table, it will print.
+
+            ("This username already exists.")
+
+        If the firstname or lastname is empty, it will print.
+
+            ("Input is invalid!")
+
+        If the email does not pass the validation, it will print.
+
+            ("Email is not valid")
+
+        If the password and password confirmation do not match, it will print.
+
+            ("Passwords do not match")
+        
+        Upon success it inserts the user detail into users table
+        and prints
+
+            (<_username_> has been registered!")
+
+        """
         db = Database()
 
         username = ""
@@ -109,6 +151,11 @@ class Menu():
         print(username + " has been registered!")
 
     def loginUser(self):
+        """
+        Receive username and password input from the user.
+
+
+        """
         username = ""
         while(username == ""):
             username = input("Enter username: ")
