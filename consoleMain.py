@@ -202,5 +202,4 @@ class consoleMP:
         """
         return self.db.getUserIDByUserName(userName)
 
-
 consoleMP()
