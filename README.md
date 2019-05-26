@@ -36,3 +36,12 @@ Robin Kwan<br/>
 * Run consoleMain.py on the reception Pi and main.py on the master pi.
 * The reception pi remains idle while the user interacts with the master pi
 * For admin privileges, run flask_main.py 
+
+
+
+# Trello Link:
+* https://trello.com/b/9jqOaddC/piotassignment2
+# Github Link:
+* https://github.com/s3604730/PiotAssignment2
+# Flask Link:
+* https://github.com/harryleau/flask-app-iot

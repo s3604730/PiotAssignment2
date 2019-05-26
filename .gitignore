@@ -1,0 +1,9 @@
+_pycache_
+__pycache__
+
+Makefile
+conf.py
+index.rst
+make.bat
+rst/
+source/
