@@ -4,24 +4,28 @@
 from abc import ABC, ABCMeta, abstractmethod
 import socket
 
+
 class AbstractSocket(ABC):
- def __init(self):
-  pass
+    """
+    This class acts as an abstract class for the 
+    sockets reception and master pi sockets
+    """
 
- #abstract method for sending message socket login
- def sendMessageLoginSocket(self):
-  pass
+    def __init(self):
+        pass
 
- #abstract method for receiving message socket login
- def receiveMessageLoginSocket(self):
-  pass
+    # abstract method for sending message socket login
+    def sendMessageLoginSocket(self):
+        pass
 
- #abstract method for sending message socket logout
- def sendMessageLogoutSocket(self):
-  pass
- 
- #abstract method for receiving message socket logout
- def receiveMessageLogoutSocket(self):
-  pass
+    # abstract method for receiving message socket login
+    def receiveMessageLoginSocket(self):
+        pass
 
- 
+    # abstract method for sending message socket logout
+    def sendMessageLogoutSocket(self):
+        pass
+
+    # abstract method for receiving message socket logout
+    def receiveMessageLogoutSocket(self):
+        pass
