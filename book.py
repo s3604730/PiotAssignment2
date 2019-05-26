@@ -8,25 +8,13 @@ class book:
         self.__ISBN = __ISBN
 
     def getBookName(self):
-        """
-        Return bookName
-        """
         return self.bookName
 
     def getBookID(self):
-        """
-        Return bookID
-        """
         return self.bookID
 
     def getAuthorName(self):
-        """
-        Return authorName
-        """
         return self.authorName
 
     def getISBN(self):
-        """
-        Return ISBN
-        """
         return self.ISBN

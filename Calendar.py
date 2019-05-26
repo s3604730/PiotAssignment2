@@ -7,9 +7,15 @@ from oauth2client import file, client, tools
 
 
 class Calendar:
+<<<<<<< HEAD
     def __init__(self):
         SCOPES = "https://www.googleapis.com/auth/calendar"
         store = file.Storage("token.json")
+=======
+    def addEvent(self, startDate, endDate, bookID):
+        SCOPES = 'https://www.googleapis.com/auth/calendar'
+        store = file.Storage('storage.json')
+>>>>>>> parent of 39d6540... sphinx
         creds = store.get()
         if(not creds or creds.invalid):
             flow = client.flow_from_clientsecrets("credentials.json", SCOPES)
@@ -45,6 +51,7 @@ class Calendar:
         event = self.service.events().insert(calendarId = "primary", body = event).execute()
         print("Book return date added to calendar")
 
+<<<<<<< HEAD
     def removeEvent(self,bookID):
         listEvents = self.service.events().list(calendarId = "primary", q = bookID).execute()
         getEvents = listEvents.get("items", [])
@@ -52,3 +59,15 @@ class Calendar:
             eventId = event['id']
         event = self.service.events().delete(calendarId='primary', eventId= eventId).execute()
         print('Event removed from calendar')
+=======
+    def removeEvent(self):
+        SCOPES = 'https://www.googleapis.com/auth/calendar'
+        store = file.Storage('storage.json')
+        creds = store.get()
+        if not creds or creds.invalid:
+            flow = client.flow_from_clientsecrets('client_secret.json', SCOPES)
+            creds = tools.run_flow(flow, store)
+        GCAL = discovery.build('calendar', 'v3', http=creds.authorize(Http()))
+        e = GCAL.events().delete(calendarId='primary', eventId='eventId').execute()
+        print('Book returned')
+>>>>>>> parent of 39d6540... sphinx

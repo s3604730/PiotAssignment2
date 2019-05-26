@@ -26,9 +26,6 @@ class Database():
 
     # createDatabase
     def createDatabase(self):
-        """
-        Create database iot2 if it does not exist.
-        """
         con = mysql.connector.connect(
             host=self.host, user=self.user, password=self.password)
         stm = "CREATE DATABASE IF NOT EXISTS iot2"
@@ -37,9 +34,6 @@ class Database():
 
     # create table users
     def createTableUser(self):
-        """
-        Create users table (id, username, password, firstname, lastname, email).
-        """
         con = mysql.connector.connect(
             host=self.host, user=self.user, password=self.password, database=self.database)
         stm = "CREATE TABLE IF NOT EXISTS users (id INT AUTO_INCREMENT PRIMARY KEY, username VARCHAR(255),password VARCHAR(255), firstName VARCHAR(255), lastName VARCHAR(255), email VARCHAR(255))"
@@ -48,11 +42,6 @@ class Database():
 
     # insert user
     def insertUser(self, user):
-        """
-        Insert 'user'(username, password, firstnName, lastName, email) into users table.
-
-            param1: 'user'
-        """
         stm = ("INSERT INTO users(username, password, firstName, lastName, email) VALUES (%s, %s, %s, %s, %s)")
 
         val = (user.getUsername(),  user.getPassword(), user.getFirstName(), user.getLastName(),
@@ -64,11 +53,6 @@ class Database():
 
     # find user by user name to for register part
     def findUserByUsername(self, username):
-        """
-        Return users that username = 'username' parameter.
-
-            param1: 'username'
-        """
         stm = ("SELECT * FROM users WHERE username = %s")
         val = (username, )
 
@@ -80,12 +64,6 @@ class Database():
 
     # find user by credentials to verify login details
     def findUserByUsernameAndPassword(self, username, password):
-        """
-        Return users that username = 'username' and password = 'password' parameter.
-
-            param1: 'username'
-            param2: 'password'
-        """
         stm = ("SELECT * FROM users WHERE username = %s AND password = %s")
         val = (username, password)
 
