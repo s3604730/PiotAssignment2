@@ -1,6 +1,6 @@
 # Programming Internet Of Things Assignment 2
 Smart Library
-Application for book borrowing service which uses two raspberry pi's to communicate through sockets.
+Application for book borrowing service which uses two raspberry pi's to communicate through sockets.<br/>
 Written in Python.
 
 # Authors
@@ -10,7 +10,7 @@ Harry Le<br/>
 Robin Kwan<br/>
 
 # Hardware Used
-* 2x Raspberry Pi 3 b+
+* 2x Raspberry Pi 3 B+
 * Microsoft LifeCam HD-3000
 
 # Software Used
@@ -31,4 +31,7 @@ Robin Kwan<br/>
 * python3 -m pip install PyMySQL
 
 # How To Run It
-* Run consoleMain.py and then run main.py on the pi. ConsoleMain will remain idle while the user interacts with the menu in main.py.
+* Configure MasterPiSocket.py and ReceptionPiSocket.py to both pi's private ip
+* Run consoleMain.py and enter authentication key given from browser prompt
+* Run consoleMain.py on the reception Pi and main.py on the master pi.
+* The reception pi remains idle while the user interacts with the master pi
