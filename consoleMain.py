@@ -11,35 +11,12 @@ os.chdir(path)
 import time
 
 class consoleMP:
-    """
-    This class acts as the Master Pi console controller
-    The console includes the functions.
-
-        - Main menu
-        - Search book
-        - Borrow book
-        - Return book
-        - Log out
-    """
-
     def __init__(self):
         self.db = Database()
         self.output = Output()
         self.initialise()
 
     def initialise(self):
-        """
-        This main menu function is automatically called after a user login 
-        then receive the current username from the socket 
-        and return userID from LMSuserID table
-        if the user does not exist, register the user into the database
-        print the menu to access the other functions. 
-
-                ("1: Search a book")
-                ("2: Borrow a book")
-                ("3: Return a book")
-                ("4: Logout")
-        """
         while(True):
             # receiving username
             #user_name = "Fdsfads"
@@ -80,11 +57,6 @@ class consoleMP:
     # searches the table for the specified book
 
     def searchBook(self, input):
-        """
-        Search books in the library database that contains of the 'input' and display them.
-
-            param1: 'input' is used to search books 
-        """
         res = self.db.searchBooks(input)
         for row in res:
             self.output.displayBook(row)
@@ -93,23 +65,6 @@ class consoleMP:
     # takes the id of a book and returns a borrowing id if it's available
 
     def borrowBook(self, user_name):
-        """
-        Prints the menu console for borrowing a book from the library. 
-
-            ("--- Borrow a book ---")
-            ("Enter the ID of the book: ")
-
-        The user borrows a book by entering a bookID. 
-        If the bookID is not found, returns to BorrowBook menu.  
-        Upon success it checks if the book is available and if so 
-        it inserts userID of the current user, bookID of the book to the database
-        and add the event to the Google Calendar of the library account. 
-        After borrowing a book completed, the function will ask if the user may borrow another book. 
-
-            ("Do you want to borrow another book?  Y/N: ")
-
-            param1: 'user_name' is the username that receives from the socket and used to return userID
-        """
         # exit = False
         print("--- Borrow a book ---")
         bookID = input("Enter the ID of the book: ")
@@ -146,23 +101,7 @@ class consoleMP:
             return
 
     # takes a borrowing id and returns the book
-    # ************ list your books shouldnt return book ************ 
     def returnBook(self, user_name):
-        """
-        Prints the menu console for listing the user's books and returning a book.
-
-            ("--- Return a book ---")
-            ("1. List your books")
-            ("2. Return your book")
-            ("3. Exit")
-        
-        The first function lists all the books that the current user has not returned. 
-        The second function allows the user return a book by entering bookID. 
-        If the bookID is not found or does not belong to the user, returns to ReturnBook menu.
-        Upon successful return, removes the event on the Google Calendar of the library.  
-
-            param1: 'user_name' is the username that receives from the socket and used to return userID
-        """
         print("--- Return a book ---")
         print("1. List your books")
         print("2. Return your book")
@@ -193,9 +132,8 @@ class consoleMP:
             return
 
     def logout(self):
-        """
-        Sends logout message from MasterPi to ReceptionPi
-        """
+        # TODO
+        '''sends logout message from MP to RP'''
         MasterPiSocket.sendMessageLogoutSocket(self)
         # self.initialise()
         time.sleep(2)
@@ -203,14 +141,7 @@ class consoleMP:
         return
 
     # get user name from reception pi through sockets
-
-    #************ FIX userName to user_name ********
     def returnUserID(self, userName):
-        """
-        Returns UserID of the current user 
-
-            param1: 'user_name' is the username that receives from the socket and used to return userID
-        """
         return self.db.getUserIDByUserName(userName)
 
 
